@@ -1,0 +1,49 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Gill Sans', sans-serif;
+}
+
+body {
+	background: white;
+
+}
+
+/* Navbar Start */
+.navbar {
+	background-color: #206eff;
+}
+
+.navbar-toggler {
+	padding: 1px 5px;
+	font-size: 15px;
+	line-height: 0.3;
+	background: #fff;
+}
+
+.logo {
+	width: 13%;
+	margin-left: 5px;
+}
+
+.content {
+	min-height: 100vh;
+	width: 100%;
+}
+
+.register-wrap {
+	margin-top: 100px;
+}
+/* Navbar End */
+
+/* Images Sizes End */
+
+.toast {
+    opacity: 1 !important;
+	border: none !important;
+}
+
+  
+
+/* Button End */
