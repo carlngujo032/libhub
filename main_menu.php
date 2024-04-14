@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="container">
                     <h4 class="m-2">Library Transactions</h4>
                     <div class="row mt-4">
-                        <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="col-md-2 col-lg-4 mb-4">
                             <div class="card bg-light p-4">
                                 <div class="text-center mb-3">
                                     <h5>Scan QR Code</h5>
@@ -166,35 +166,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-8">
+                        <div class="col-md-10 col-lg-8">
                             <div class="card bg-light p-4">
-                                <form action="BorrowReturnBook.php" method="post">
-                                    <div class="form-group">
-                                    <label for="bookId" class="mb-1">Your QR Code<span class="bi bi-arrow-down-circle text-dark mx-1"></span></label>
-                                        <input type="text" class="form-control mb-1" id="bookId" name="bookId"
-                                            placeholder="Scan QR Code of the book" autofocus>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><span class="bi bi-info-circle text-dark fw-bold"></span> Status:</label><br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="borrowStatus" value="borrow" checked>
-                                            <label class="form-check-label" for="borrowStatus">Borrow</label>
+                            <?php if (isset($_SESSION['message'])): ?>
+                                <div class="container">
+                                    <?php if (strpos($_SESSION['message'], 'successfully borrowed') !== false || strpos($_SESSION['message'], 'successfully returned') !== false): ?>
+                                        <!-- Success message -->
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Success!</strong> <?= $_SESSION['message'] ?>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="returnStatus" value="return">
-                                            <label class="form-check-label" for="returnStatus">Return</label>
+                                    <?php else: ?>
+                                        <!-- Warning message -->
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Warning!</strong> <?= $_SESSION['message'] ?>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
-                                    </div>
-
-                                </form>
-                                <?php if (isset($_SESSION['message'])): ?>
-                                <div class="mt-3">
-                                    <p>
-                                        <?= $_SESSION['message'] ?>
-                                    </p>
-                                    <?php unset($_SESSION['message']); ?>
+                                    <?php endif; ?>
                                 </div>
-                                <?php endif; ?>
+                                <?php unset($_SESSION['message']); ?>
+                            <?php endif; ?>
+
+                            <form action="BorrowReturnBook.php" method="post" class="form-horizontal" style="border-radius: 5px;padding:10px;background:#fff;" id="form">
+                                    <input type="text" name="bookId" id="text" placeholder="Scan QR Code of the book" class="form-control mb-2" autofocus>
+                                    <label><i class="bi bi-info-circle text-dark"></i> Status:</label><br>
+                                    <label class="form-check-label"><input class="form-check-input" type="radio" name="status" value="borrow" checked> Borrow</label>
+                                    <label class="form-check-label"><input class="form-check-input" type="radio" name="status" value="return"> Return</label>
+                                </form>
                             </div>
                         </div>
                     </div>
